@@ -1,0 +1,74 @@
+<div id="fondo" class="container-fluid min-vh-100">
+    <main>
+        <!--**************************************MENU***************************************-->
+        <div id="menu" class="col-12 col-lg-12 pr-0 pl-0 bg-light" style="background-color: transparent !important;">
+            <app-menu></app-menu>
+        </div>
+        <div class="col-12 col-lg-12 row h-5 ml-0 mr-0 menuflotante whitebackgroundTrans pt-2 pb-2 d-flex">
+            <form [formGroup]="formTablero" (ngSubmit)="onSubmit()" class=" ml-auto mr-auto ">
+                <input type="text" (focusout)="onSubmit()" [(ngModel)]="tablero.nombre" value=""
+                    formControlName="nombre" id="nombre" class="pl-2 input-transparent Title"
+                    style="text-align: center !important;" required />
+                <input type="number" id="tablero.id" formControlName="id" required [(ngModel)]="tablero.id" hidden />
+            </form>
+            <button (click)="eliminar(tablero.id)"
+                class="btn btn-submit redbackgroundsemitransparent borderdark ">Borrar tablero<i
+                    class="fas fa-minus-square pl-2"></i></button>
+        </div>
+        <div id="contenido">
+            <div class="col-12 col-lg-12 row pt-5 pl-0 pr-0 mr-0 ml-0 card-deck hcolumna">
+                <div cdkDropListGroup class="row flex-row flex-nowrap mr-0 ml-0 mt-5">
+                    <div class="card hcolumna card-background col-3 col-lg-3 p-0 m-2 b-0" *ngFor="let col of columnas"
+                        style="max-width: 300px;max-height: 450px;">
+                        <div class="card-header row m-0 p-0">
+                            <label class="pl-2 pt-2 input-transparent col-10 label columTitle">{{col.nombre}}</label>
+                            <button class="ml-auto btn" style="height: 100%;" type="button" id="update"
+                                (click)="modalUpdateCol(col.id)" aria-haspopup="true" aria-expanded="false">
+                                <i class="fas fa-ellipsis-h"></i>
+                            </button>
+                        </div>
+                        <div class="card-body p-1 card-body-target overflow-auto">
+                            <div class="example-container  overflow-scroll">
+                                <div cdkDropList [cdkDropListData]="col.tarjetas" class="example-list"
+                                    (cdkDropListDropped)="drop2($event,col.id)"
+                                    style="overflow: scroll; width: 350px; overflow-y: auto; overflow-x: hidden;">
+                                    <li class="row example-box mt-1 ml-0 mr-0 pl-0 pr-0"
+                                        (dblclick)="modalTarjeta(tar.id,col.id)" *ngFor="let tar of col.tarjetas"
+                                        cdkDrag>
+                                        <label class="col-12 tarjeta tarjetaTitle">{{tar.nombre}}</label>
+                                        <label class="col-lg-12 col-md-12 label" *ngIf="tar.check_fin!=null">
+                                            <input type="checkbox" id="check_fin" class="mr-2" value=""
+                                                [(ngModel)]="tar.check_fin" readonly (click)="false" />
+                                            <a
+                                                *ngIf="tar.Fecha_fin!=null && tar.Fecha_fin!='' && tar.Fecha_inicio!=null && tar.Fecha_inicio!=''; else elseBlock">
+                                                {{tar.Fecha_inicio}}
+                                                {{tar.Time_inicio}} -
+                                                {{tar.Fecha_fin}}
+                                                {{tar.Time_fin}}
+                                            </a>
+                                            <ng-template #elseBlock>
+                                                <a *ngIf="tar.Fecha_inicio!=null && tar.Fecha_inicio!=''">{{tar.Fecha_inicio}}
+                                                    {{tar.Time_inicio}} inicio </a>
+                                                <a *ngIf="tar.Fecha_fin!=null && tar.Fecha_fin!=''"> {{tar.Fecha_fin}}
+                                                    {{tar.Time_fin}} fin </a>
+                                            </ng-template>
+                                        </label>
+                                    </li>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-footer p-0">
+                            <button (click)="modalTar(col.id)" class="btn btn-submit w-100">Nueva tarjeta<i
+                                    class="fas fa-plus pl-2"></i></button>
+                        </div>
+                    </div>
+                    <div class="card hcolumna background_transparent col-3 col-lg-3 p-0 m-2 b-0">
+                        <button (click)="modalCol()" class="btn btn-submit whitebackgroundTrans borderdark"
+                            style="max-width: 300px;max-height: 450px;">Nueva columna<i
+                                class="fas fa-plus pl-2"></i></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+</div>

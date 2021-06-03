@@ -1,0 +1,27 @@
+<!-- Modal que se muestra para actualizar la foto del usuario -->
+<div class="">
+  <div class="modal-header whitebackground row m-0">
+    <h4 class="modal-title col-lg-11 col-md-11 text-center">Nueva Columna</h4>
+    <button type="button" class="close col-lg-1 col-md-1 pl-0" aria-label="Close"
+      (click)="activeModal.close('Cross click')">
+      <i class="fas fa-times-circle fa-sm graytext"></i>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form class="row" [formGroup]="newColumna" (ngSubmit)="onSubminTablero()" class="px-2">
+      <div class="form-row ml-1 col-lg-12 col-md-12 pr-0">
+        <div class="input-group row col-lg-12 col-md-12">
+          <div class="mb-3 col-lg-12 col-md-12">
+            <input type="text" id="nombre" formControlName="nombre" class="form-control"
+              placeholder="Nombre de la columna" required />
+          </div>
+        </div>
+        <button type="submit" class="btn btn-success ml-2">Crear columna<i class="fa fa-check pl-2"
+            aria-hidden="true"></i></button>
+        <button type="button" (click)="cancelar()" class="btn btn-danger ml-5">
+          Cancelar<i class="fa fa-times pl-2 ml-auto mr-5" aria-hidden="true"></i>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

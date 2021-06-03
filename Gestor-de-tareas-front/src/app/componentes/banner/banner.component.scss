@@ -1,0 +1,11 @@
+.super{
+    background-image: url('../../../assets/img/icons/banner.png');
+    background-repeat: no-repeat;
+    background-size: contain;
+    height: 449px;
+    color: rgba(128, 128, 128);
+}
+.close:hover{
+    color: white;
+    background-color: rgba(128, 128, 128, 0.61);
+}

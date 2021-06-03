@@ -1,0 +1,113 @@
+$primary: #CED3DC;
+$secondary: rgb(252, 247, 248);
+//$dark: #464646;
+$dark: rgb(107, 5, 4);
+//  #F73F52    #FCF7F8    #CED3DC   #545677 #444140
+$danger: #F73F52;
+$success: #2aac23;
+$light: #f2f2f2;
+$info: rgb(107, 107, 107);
+$warning: rgb(212, 126, 76);
+$h1-font-size: 2rem;
+
+#fondo {
+    padding-left: 0px;
+    padding-right: 0px;
+
+    background: rgb(203,19,26);
+    background: linear-gradient(48deg, rgba(203,19,26,1) 17%, rgba(177,9,21,1) 47%, rgba(154,0,16,1) 100%); 
+
+    background-image: url('../assets/img/fondo3.jpg');
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: 100%;
+}
+#fondo2 {
+    padding-left: 0px;
+    padding-right: 0px;
+    /**
+    background: rgb(247,63,82);
+    background: linear-gradient(90deg, rgba(247,63,82,1) 0%, rgba(254,164,72,1) 50%, rgba(255,226,134,1) 100%); 
+    **/
+
+    background: rgb(203,19,26);
+    background: linear-gradient(48deg, rgba(203,19,26,1) 17%, rgba(177,9,21,1) 47%, rgba(154,0,16,1) 100%); 
+
+}
+#fondoblanco {
+    padding-left: 0px;
+    padding-right: 0px;
+    background-color: $light;
+}
+
+.icon{
+    max-width: 500px;
+}
+.fondomulty{
+    background: linear-gradient(90deg, rgba(247,63,82,1) 0%, rgba(254,164,72,1) 50%, rgba(255,226,134,1) 100%); 
+}
+.background_transparent{
+    background-color: transparent !important;
+}
+.redbackground{
+    background-color: $danger;
+}
+.reddarkbackground{
+    background-color: $dark !important;
+    color: white !important;
+}
+.redbackground{
+    background-color:  rgb(165, 70, 79) !important;
+    color: white !important;
+}
+.whitebackground{
+    background-color: white;
+}
+.whitebackgroundTrans{
+    background-color:  rgba(165, 165, 165, 0.9) !important;
+}
+.redbackgroundsemitransparent{
+    background-color:  rgba(203,19,26,0.7) !important;
+}
+.border{
+    border: 1px solid rgba(0, 0, 0, 0.125);
+}
+.borderdark{
+    border: 1px solid rgba(0, 0, 0, 0.3) !important;
+}
+.shadow{
+    box-shadow: 0 15px 30px 0 rgba(0,0,0,.11),0 5px 15px 0 rgba(0,0,0,.08);
+}
+
+.redtext{
+    color: $danger;
+}
+.reddarktext{
+    color: $dark;
+}
+.greentext{
+    color:  rgba(247,63,82,1);
+}
+.redtext{
+    color:  rgba(247,63,82,1);
+}
+.graytext{
+    color:  rgb(107, 107, 107);;
+}
+.subTitle{
+    color: $info;
+    font-weight: 500;
+    font-size: 15px;
+}
+.columTitle{
+    font-weight: 501;
+    font-size: 15px;
+}
+.tarjetaTitle{
+    font-size: 17px;
+}
+.Title{
+    $info: rgb(107, 107, 107);
+    font-weight: 400;
+    font-size: 23px;
+}

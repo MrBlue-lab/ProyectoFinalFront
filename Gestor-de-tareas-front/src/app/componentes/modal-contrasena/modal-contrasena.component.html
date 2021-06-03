@@ -1,0 +1,54 @@
+<!-- Modal que se muestra para actualizar la foto del usuario -->
+<div class="">
+    <div class="modal-header whitebackground row m-0">
+        <h4 class="modal-title col-lg-11 col-md-11 text-center">Cambiar contraseña</h4>
+        <button type="button" class="close col-lg-1 col-md-1 pl-0" aria-label="Close"
+            (click)="activeModal.close('Cross click')">
+            <i class="fas fa-times-circle fa-sm graytext"></i>
+        </button>
+    </div>
+    <div class="modal-body">
+        <form [formGroup]="registroPass" (ngSubmit)="onSubmitPass()" class="row">
+            <div class="col-md-12 col-lg-12 mb-4">
+                <label>* Contraseña actual:</label>
+                <input type="password" class="form-control" id="password" formControlName="password" minlength="5"
+                    value="" />
+                <div class="error" *ngIf="(submitted || formulario2.password.touched) && formulario2.password.errors">
+                    <div *ngIf="formulario2.password.errors.required">Este campo es obligatorio</div>
+                    <div *ngIf="formulario2.password.errors.minlength">La contraseña debe contener más de
+                        {{formulario2.password.errors.minlength.requiredLength}} carácteres</div>
+                </div>
+            </div>
+            <div class="col-md-12 col-lg-12 mb-2">
+                <label>* Nueva contraseña:</label>
+                <input type="password" class="form-control" id="newpassword" formControlName="newpassword" minlength="5"
+                    value="" />
+                <div class="error"
+                    *ngIf="(submitted || formulario2.newpassword.touched) && formulario2.newpassword.errors">
+                    <div *ngIf="formulario2.newpassword.errors.required">Este campo es obligatorio</div>
+                    <div *ngIf="formulario2.newpassword.errors.minlength">La contraseña debe contener más de
+                        {{formulario2.newpassword.errors.minlength.requiredLength}} carácteres</div>
+                </div>
+            </div>
+            <div class="col-md-12 col-lg-12">
+                <label>* Repite la contraseña:</label>
+                <input type="password" class="form-control" id="renewpassword" formControlName="renewpassword"
+                    minlength="5" value="" />
+                <div class="error"
+                    *ngIf="(submitted || formulario2.renewpassword.touched) && formulario2.renewpassword.errors">
+                    <div *ngIf="formulario2.renewpassword.errors.required">Este campo es obligatorio</div>
+                    <div *ngIf="formulario2.renewpassword.errors.minlength">La contraseña debe contener más de
+                        {{formulario2.renewpassword.errors.minlength.requiredLength}} carácteres</div>
+                </div>
+                <div class="error" *ngIf="validarDistintasPass()">Las contraseñas no son iguales</div>
+            </div>
+            <div class="col-md-12 col-lg-12 pt-3">
+                <button type="submit" class="btn btn-success"><i class="fa fa-save" aria-hidden="true"></i>
+                  Guardar</button>
+                <button type="button" (click)="cancelar()" class="btn btn-danger ml-5 ml-auto mr-5">
+                    Cancelar<i class="fa fa-times pl-2" aria-hidden="true"></i>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

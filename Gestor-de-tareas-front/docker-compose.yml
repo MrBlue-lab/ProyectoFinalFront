@@ -1,0 +1,7 @@
+version: "3.7"
+services:
+  client-angular:
+    build: .
+    ports:
+      - "8081:4200"
+    command: bash

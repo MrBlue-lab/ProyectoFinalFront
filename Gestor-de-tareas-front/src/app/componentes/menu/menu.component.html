@@ -1,0 +1,71 @@
+<aside>
+  <nav class="d-flex" ng-click="$event.preventDefault()"> 
+    <button id="home" name="home" routerLink="/home" routerLinkActive="btn"
+      class="btn btn-aside text-dark">
+      <i class="fas fa-home " name="Home"></i>
+    </button>
+    <button id="calendario" name="calendario" routerLink="/calendario" routerLinkActive="bg-primary text-activo"
+      class="btn btn-aside text-dark">
+      <i class=" fas fa-calendar-times "></i><span class="ml-3 ">Calendario</span>
+    </button>
+    <button id="tableros" name="tableros" routerLink="/tableros" routerLinkActive="bg-primary text-activo"
+      class="btn btn-aside text-dark">
+      <i class=" fas fa-table "></i><span class="ml-3 ">Tableros</span>
+    </button> 
+
+    <img class="d-block ml-auto mr-auto" src="../../../assets/img/icons/title_icon_png.png" alt="logo" width="100px">
+    <button id="ring" name="ring" routerLinkActive="btn"
+      class="btn btn-aside text-dark">
+      <i class="fas fa-bell "></i> 1
+    </button>
+    <button id="help" name="help" routerLink="/help" routerLinkActive="btn"
+      class="btn btn-aside text-dark">
+      <i class="fas fa-question mr-1"></i>
+    </button>
+    <div class="dropdown user text-dark m-0">
+      <button class="btn col-lg-12 col-12 img-menu" style="height: 100%;" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <img class="rounded-circle" alt="foto_perfil" src="{{user.foto}}" />
+      </button>
+      <div id="menu-de" name="menu-de" class="dropdown-menu dropdown-menu-right menu" aria-labelledby="dropdownMenuButton">
+        
+        <div class="d-flex">
+          <div class="col-lg-12 col-12 p-2" style="text-align: center;">
+            <h6>{{user.email}}</h6>
+            <h6>{{user.nombre}} {{user.apellidos}}</h6>
+          </div>
+        </div>
+        <div class="dropdown-divider"></div>
+        <a class="dropdown-item" routerLink="/perfil"><i class=" fas fa-user-cog ml-auto pl-2 pr-2"></i> Editar perfil</a>
+        <a class="dropdown-item" routerLink="/info"><i class=" fas fa-mug-hot ml-auto pl-2 pr-2"></i>Sobre nosotros</a>
+        <div class="dropdown-divider"></div>
+        <div class="col-lg-12 col-12">
+          <button id="log_out" name="log_out " routerLinkActive="bg-primary text-activo" routerLink="/login"
+            class="col-lg-12 col-12 mx-auto btn btn-aside text-dark" (click)="logOut()">
+            <i class="fas fa-sign-out-alt"></i>
+            <span class="ml-3 ">Cerrar sesión</span>
+          </button>
+        </div>
+      
+      </div>
+    </div>  
+  </nav>
+</aside>
+<!--
+  
+-->
+<!-- 
+<aside>
+    <div class="row enlaces">
+      <div class="col">
+        <button id="cursos" name="cursos" routerLink="/Calendario" routerLinkActive="bg-primary text-activo"
+          class="col-lg-11 col-3 mx-auto btn btn-aside text-dark">
+          <i class=" fas fa-users "></i><span class="ml-3 ">Calendario</span>
+        </button>
+        <button id="empresa" name="empresas" routerLinkActive="bg-primary text-activo" routerLink="/tableros"
+          class="col-lg-11 col-3 col-3 mx-auto btn btn-aside text-dark">
+          <i class="fas fa-briefcase "></i>
+          <span class="ml-3 ">Mis tableros</span>
+        </button>
+      </div>
+    </div>
+  </aside>-->

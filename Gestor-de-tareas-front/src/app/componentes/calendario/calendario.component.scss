@@ -1,0 +1,100 @@
+.wrapper-calendar{
+  margin:1rem;
+  padding: .5rem;
+}
+
+div {
+    text-align: center;
+  }
+  
+  ol {
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    margin: 0;
+    padding: 0;
+  }
+
+  h2 {
+    margin-bottom: 4px;
+    padding: 0;
+  }
+  
+  .first-day {
+    grid-column-start: var(--first-day-start, 0);
+  }
+  
+  .day-name {
+    background: #eee;
+    font-weight: bold;
+    font-size: 12px;
+    margin-bottom: 2px;
+    padding: 4px;
+    text-align: center;
+  }
+  
+  .header-calendar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    align-content: center;
+  }
+  
+  .header-calendar h1 {
+    width: 100%;
+    font-size: 13px;
+  }
+  
+  .header-calendar button {
+    cursor: pointer;
+    background-color: transparent;
+    border: 0;
+  }
+  .day{
+  border: solid 0.4px #80808086;
+  font-size: 20px !important;
+  }
+  .tarjetica{
+    height:100%;
+    width: 100%;
+    transition-property: height, width;
+    transition-duration: 1s;
+    transition-timing-function: linear;
+  }
+  
+  .text-20{
+    font-size: 20px !important;
+  }
+  .mes{
+    font-size: 20px !important;
+  }
+  ul{
+    text-align: initial;
+    li{
+      border-top: solid 0.4px #80808086;
+    }
+  }
+  .card-body{
+    white-space: break-spaces;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .card{
+    white-space: break-spaces;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    
+  }
+  .overflow{
+    text-align: initial;
+    white-space: nowrap;
+    margin-bottom: 8px;
+    overflow-x: hidden;
+    overflow-y: auto;
+    padding-bottom: 8px;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+  }

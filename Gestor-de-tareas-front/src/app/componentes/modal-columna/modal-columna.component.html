@@ -1,0 +1,38 @@
+<div class="">
+    <div class="modal-body">
+  
+      <form class="row" [formGroup]="formTarjeta" (ngSubmit)="onSubmit()" class="px-2">
+  
+        <button type="button" class="close col-lg-1 col-md-1 pl-0" aria-label="Close"
+          (click)="activeModal.close('Cross click')" style="width: 21px;">
+          <i class="fas fa-times-circle fa-sm graytext"></i>
+        </button>
+        <div class="form-row ml-1 col-lg-12 col-md-12 mb-3 pr-5">
+          <input type="text" id="id" class="light" value="{{columna.id}}" hidden formControlName="id" />
+          <textarea id="nombre" class="light modal-title col-lg-12 col-md-12 subTitle" value="{{columna.nombre}}"
+            formControlName="nombre"></textarea>
+        </div>
+        <div class="form-row ml-1 col-lg-12 col-md-12 pr-0">
+          <div class="input-group row col-lg-12 col-md-12">
+            <div class="mb-3 col-lg-12 col-md-12">
+              <div class="col-lg-12 col-md-12 pl-0 subTitle">
+                <label>Posición</label>
+              </div>
+              <input type="number" name="posicion" id="posicion" formControlName="posicion" class="form-control"
+                placeholder="Añada descripción la tarjeta." value='{{columna.posicion}}'>
+            </div>
+          </div>
+          <div class="row  col-lg-12 col-md-12 pl-0 pr-0">
+            <button type="submit" class="btn btn-success ml-2">Guardar<i class="fa fa-check pl-2"
+                aria-hidden="true"></i></button>
+            <button type="button" (click)="cancelar()" class="btn btn-danger ml-auto mr-auto">
+              Cancelar<i class="fa fa-sign-out-alt pl-2" aria-hidden="true"></i>
+            </button>
+            <button type="button" (click)="eliminar(columna.id)" class="btn ml-5 reddarkbackground">
+              Eliminar<i class="fa fa-times pl-2" aria-hidden="true"></i>
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>

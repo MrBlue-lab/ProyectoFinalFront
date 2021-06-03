@@ -1,0 +1,33 @@
+.light{
+    border:none !important;
+    background: transparent !important;
+    box-shadow: none !important;
+    color: #000 !important;
+}
+.light, button:hover{
+    text-decoration: none;
+}
+.light, button:focus{
+    text-decoration: none;
+}
+.imput-tranparent:focus,.imput-tranparent:focus-visible{
+    background-color: #fff;
+    box-shadow: inset 0 0 0 2px #6b6b6b;
+    border: none;
+}
+#name{
+    font-size: 30px;
+}
+#collapseOne{
+    background:rgba(107, 107, 107,0.4) ;
+    border-radius: 3px;
+}
+textarea{
+    background:rgba(107, 107, 107,0.4) ;
+}
+textarea:active{
+    box-shadow: inset 0 0 0 2px rgb(107, 107, 107) ;
+}
+textarea:focus-visible{
+    box-shadow: inset 0 0 0 2px rgb(107, 107, 107) ;
+}

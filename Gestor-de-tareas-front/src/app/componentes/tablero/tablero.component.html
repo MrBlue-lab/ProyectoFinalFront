@@ -1,0 +1,40 @@
+<div id="fondo2" class="container-fluid min-vh-100">
+    <main>
+    <!--**************************************MENU***************************************-->
+        <div id="menu" class="col-12 col-lg-12 pr-0 pl-0 bg-light" style="background-color: transparent !important;">
+            <app-menu></app-menu>
+        </div>
+        <div class="col-12 col-lg-12 row h-5 menuflotante whitebackgroundTrans pt-2 pb-2 text-center">
+          <h5>{{tablero.nombre}}</h5>
+          <button (click)="modalCol()" class="btn btn-submit">Nueva columna<i class="fas fa-plus pl-2"></i></button>
+        </div>
+        <div id="contenido" >
+          <div cdkDropListGroup class="col-12 col-lg-12 row pt-5 mr-0 ml-0 card-deck hcolumna" cdkDropList [cdkDropListData]="columnas" (cdkDropListDropped)="drop2($event)" >
+              
+              <div cdkDropListGroup class="col-12 col-lg-12 row mt-1 card-deck pt-5 hcolumna">
+                <div class="card hcolumna card-background col-3 col-lg-3 p-2 m-2 b-0" *ngFor="let tab of columnas" cdkDrag>
+                  <div class="card-header row m-0">
+                    <h5 class=" align-items-init m-0">{{tab.nombre}}</h5>
+                    <h5 class=" align-items-init m-0">{{tab.posicion}}</h5>
+                    <button class="ml-auto btn"><i class="fas fa-ellipsis-h"></i></button>
+                  </div>
+                  <div class="card-body p-1 card-body-target">
+                      <div class="example-container  overflow-scroll">
+                        <div cdkDropList [cdkDropListData]="tab.tarjetas" class="example-list" (cdkDropListDropped)="drop2($event)" style="overflow: scroll; height: 426px; overflow-y: auto; overflow-x: hidden;">
+                          <div class="example-box mt-1" *ngFor="let item of tab.tarjetas" cdkDrag>{{item.valor}}</div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="card-footer">
+                      <button (click)="modalTar()" class="btn btn-submit w-100">Nueva tarjeta<i class="fas fa-plus pl-2"></i></button>
+                    </div>
+                </div>
+              </div>
+            <!--</div>-->
+          </div>
+        </div>
+        <div class="col-12 col-lg-12 pr-0 pl-0 bg-light">
+          <app-footer></app-footer>
+      </div>
+    </main>
+  </div>

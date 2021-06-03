@@ -1,0 +1,97 @@
+<div class="">
+  <div class="modal-body">
+    <form class="row" [formGroup]="formTarjeta" (ngSubmit)="onSubmit()" class="px-2">
+      <button type="button" class="close col-lg-1 col-md-1 pl-0" aria-label="Close"
+        (click)="activeModal.close('Cross click')" style="width: 21px;">
+        <i class="fas fa-times-circle fa-sm graytext"></i>
+      </button>
+      <div class="form-row ml-1 col-lg-12 col-md-12 mb-3 pr-5">
+        <input type="text" id="id" class="light" value="{{tarjeta.id}}" hidden formControlName="id" />
+        <textarea id="nombre" class="light modal-title col-lg-12 col-md-12 subTitle" value="{{tarjeta.nombre}}"
+          formControlName="nombre"></textarea>
+      </div>
+      <div class="form-row ml-1 col-lg-12 col-md-12 pr-0">
+        <div class="input-group row col-lg-12 col-md-12">
+          <div class="mb-3 col-lg-12 col-md-12">
+            <div class="col-lg-12 col-md-12 pl-0 subTitle mb-3" *ngIf="tarjeta.check_fin!=null">
+              <input type="checkbox" id="check_fin" formControlName="check_fin" class="mr-2 ml-2 mt-3" value=""
+                [(ngModel)]="tarjeta.check_fin" />
+              <a *ngIf="!boolFechaini">{{tarjeta.Fecha_inicio}} {{tarjeta.Time_inicio}} inicio </a> <a
+                *ngIf="!boolFechafin"> {{tarjeta.Fecha_fin}} {{tarjeta.Time_fin}} fin</a><i
+                class="fa fa-clock pl-2 ml-auto" aria-hidden="true"></i>
+            </div>
+            <div class="col-lg-12 col-md-12 pl-0 subTitle">
+              <label>Descripción</label>
+            </div>
+            <textarea name="descripcion" id="descripcion" formControlName="descripcion" class="form-control"
+              placeholder="Añada descripción la tarjeta." value='{{tarjeta.descripcion}}'></textarea>
+          </div>
+          <!-------------------------------------------------------------------->
+          <div id="accordion" class=" col-lg-12 col-md-12 mb-3">
+            <div class="card light">
+              <div class="card-header light pl-0 ml-0" id="headingOne">
+                <h5 class="mb-0">
+                  <button type="button" class="btn btn-link text-dark collapsed" data-toggle="collapse"
+                    data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                    <i class="fa fa-plus pr-2 ml-auto" aria-hidden="true"></i>Añadir Fecha
+                  </button>
+                </h5>
+              </div>
+              <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
+                <div class="card-body tema-dark text-white2 row">
+                  <!-------------------------------------------------------------------->
+                  <div class="col-lg-12 col-md-12 row">
+                    <div class="col-lg-12 col-md-12">
+                      <input type="checkbox" id="not_fecha_inicio" formControlName="not_fecha_inicio" class="mr-2"
+                        (click)="disabledIni()" value="" [(ngModel)]="boolFechaini" /><label>
+                        Fecha de inicio</label>
+                    </div>
+                    <div class="col-lg-6 col-md-6">
+                      <input type="date" id="dateinit" formControlName="dateinit" class="form-control"
+                        data-toggle="tooltip" data-placement="top" title="Active la fecha de inicio"
+                        [readonly]="boolFechaini" value="{{tarjeta.Fecha_inicio}}" />
+                    </div>
+                    <div class="col-lg-6 col-md-6">
+                      <input type="time" id="timefin" formControlName="timeinit" class="form-control"
+                        data-toggle="tooltip" data-placement="top" title="Active la fecha de incio"
+                        [readonly]="boolFechaini" value="{{tarjeta.Time_inicio}}" />
+                    </div>
+                  </div>
+                  <div class="col-lg-12 col-md-12 row mt-3">
+                    <div class="col-lg-12 col-md-12">
+                      <input type="checkbox" id="not_fecha_fin" formControlName="not_fecha_fin" class="mr-2"
+                        (click)="disabledFin()" value="" [(ngModel)]="boolFechafin" /><label>
+                        Fecha de vencimiento</label>
+                    </div>
+                    <div class="col-lg-6 col-md-6">
+                      <input type="date" id="datefin" formControlName="datefin" class="form-control"
+                        data-toggle="tooltip" data-placement="top" title="Active la fecha de vencimiento"
+                        [readonly]="boolFechafin" value="{{tarjeta.Fecha_fin}}" />
+                    </div>
+                    <div class="col-lg-6 col-md-6">
+                      <input type="time" id="timefin" formControlName="timefin" class="form-control"
+                        data-toggle="tooltip" data-placement="top" title="Active la fecha de vencimiento"
+                        [readonly]="boolFechafin" value="{{tarjeta.Time_fin}}" />
+                    </div>
+                  </div>
+                  <!------------------------------------------------------------------->
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-------------------------------------------------------------------->
+        </div>
+        <div class="row  col-lg-12 col-md-12 pl-0 pr-0">
+          <button type="submit" class="btn btn-success ml-2">Guardar<i class="fa fa-check pl-2"
+              aria-hidden="true"></i></button>
+          <button type="button" (click)="cancelar()" class="btn btn-danger ml-auto mr-auto">
+            Cancelar<i class="fa fa-sign-out-alt pl-2" aria-hidden="true"></i>
+          </button>
+          <button type="button" (click)="eliminar(tarjeta.id)" class="btn ml-5 reddarkbackground">
+            Eliminar<i class="fa fa-times pl-2" aria-hidden="true"></i>
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

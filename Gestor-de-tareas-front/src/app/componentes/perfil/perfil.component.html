@@ -1,0 +1,70 @@
+<div id="fondo" class="container-fluid min-vh-100">
+  <main>
+    <!--**************************************MENU***************************************-->
+    <div id="menu" class="col-12 col-lg-12 pr-0 pl-0 bg-light" style="background-color: transparent !important;">
+      <app-menu></app-menu>
+    </div>
+    <div id="contenido" class="col-8 col-lg-8 row pt-5 m-0 ml-auto mr-auto p-0 overflow-hidden">
+      <div class="col-12 col-lg-12 mt-2  ml-1 row">
+        <div class="card w-100">
+          <div class="row no-gutters">
+            <div class="col-sm-6 mt-1 p-2">
+              <div class="text-center">
+                <h1>Perfil</h1>
+              </div>
+              <div class="card-body row">
+                <form [formGroup]="nuevoRegistro" (ngSubmit)="onSubmit()" class="col-md-12 col-lg-12 row">
+                  <div class="col-md-12 col-lg-12 mb-2">
+                    <label>Email: </label>
+                    <input type="email" class="form-control" id="email" formControlName="email"
+                      [(ngModel)]="mod.email" />
+                    <div class="error" *ngIf="(submitted || formulario.email.touched) && formulario.email.errors">
+                      <div *ngIf="formulario.email.errors.required">No puede estar vacío</div>
+                      <div *ngIf="formulario.email.errors.email">Introduce un email válido</div>
+                    </div>
+                  </div>
+                  <div class="col-md-12 col-lg-12 mt-12">
+                    <label>Nombre: </label>
+                    <input type="text" class="form-control" id="nombre" formControlName="nombre"
+                      [(ngModel)]="mod.nombre"
+                      pattern="^([a-zA-ZñÑáéíóúÁÉÍÓÚüÜ ']{2,25})+([\s]*)+([a-zA-ZñÑáéíóúÁÉÍÓÚüÜ ']{1,25})$" />
+                    <div class="error" *ngIf="(submitted || formulario.nombre.touched) && formulario.nombre.errors">
+                      <div *ngIf="formulario.nombre.errors.required">No puede estar vacío</div>
+                      <div *ngIf="formulario.nombre.errors.pattern">Introduce un nombre válido</div>
+                    </div>
+                  </div>
+                  <div class="col-md-12 col-lg-12 mt-2">
+                    <label>Apellidos: </label>
+                    <input type="text" class="form-control" id="apellidos" formControlName="apellidos"
+                      [(ngModel)]="mod.apellidos"
+                      pattern="^([a-zA-ZñÑáéíóúÁÉÍÓÚüÜ']{2,25})+([\s]{1})+([a-zA-ZñÑáéíóúÁÉÍÓÚüÜ ']{2,25})$" />
+                    <div class="error"
+                      *ngIf="(submitted || formulario.apellidos.touched) && formulario.apellidos.errors">
+                      <div *ngIf="formulario.apellidos.errors.required">No puede estar vacío</div>
+                      <div *ngIf="formulario.apellidos.errors.pattern">Introduce dos apellidos válidos</div>
+                    </div>
+                  </div>
+                  <div class="modal-footer" style="border: none;">
+                    <button type="submit" class="btn btn-success"><i class="fa fa-save" aria-hidden="true"></i>
+                      Guardar</button>
+                  </div>
+                </form>
+                    <button class="btn btn-danger ml-3" (click)="modalPassw()">
+                      <i class="fa fa-lock" aria-hidden="true"></i> Cambiar contrasena
+                    </button>
+              </div>
+
+            </div>
+            <div class="col-sm-6">
+              <img class="card-img" src="../../../assets/img/default.jpg" width="300px" alt="Suresh Dasari Card">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <div class="mt-5 bg-light">
+    <app-footer></app-footer>
+  </div>
+</div>
