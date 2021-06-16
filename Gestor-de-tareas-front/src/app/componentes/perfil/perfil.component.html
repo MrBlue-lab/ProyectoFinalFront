@@ -55,8 +55,27 @@
               </div>
 
             </div>
-            <div class="col-sm-6">
-              <img class="card-img" src="../../../assets/img/default.jpg" width="300px" alt="Suresh Dasari Card">
+            <div class="col-sm-6 row justify-content-center">
+              <img class="rounded-circle mt-3" src="{{user.foto}}" width="300px" height="300px" alt="Suresh Dasari Card">
+              <form class="row mt-3 justify-content-center" [formGroup]="fotoPerfil" (ngSubmit)="onSubmitFoto()">
+                <div class="form-row ml-1">
+                  <div class="input-group">
+                    <div class="custom-file">
+                      <input type="file" class="custom-file-input" formControlName="fotoPerfil" id="fotoPerfil"
+                        (change)="guardarFoto($event)">
+                      <label *ngIf="!foto" class="custom-file-label input-dark" for="fotoPerfil">Sube aquí tu
+                        foto</label>
+                      <label *ngIf="foto" class="custom-file-label input-dark" for="fotoPerfil">{{foto.name}}</label>
+                    </div>
+                    <div class="input-group-append">
+                      <button class="btn btn-primary">Añadir</button>
+                    </div>
+                  </div>
+                  <div class="error" *ngIf="submittedFoto && formularioFoto.fotoPerfil.errors">
+                    <div *ngIf="formularioFoto.fotoPerfil.errors.required">Este campo es obligatorio</div>
+                  </div>
+                </div>
+              </form>
             </div>
           </div>
         </div>

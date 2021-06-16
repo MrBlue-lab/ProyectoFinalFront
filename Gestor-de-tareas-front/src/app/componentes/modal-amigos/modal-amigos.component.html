@@ -1,0 +1,33 @@
+<!-- Modal que se muestra para actualizar la foto del usuario -->
+<div class="">
+    <div class="modal-header whitebackground row m-0">
+        <h4 class="modal-title col-lg-11 col-md-11 text-center">Añadir amigo</h4>
+        <button type="button" class="close col-lg-1 col-md-1 pl-0" aria-label="Close"
+            (click)="activeModal.close('Cross click')">
+            <i class="fas fa-times-circle fa-sm graytext"></i>
+        </button>
+    </div>
+    <div class="modal-body">
+        <div class="card" style="border: none;">
+            <div class="form-group">
+                <input type="email" class="form-control" id="search-text" aria-describedby="search-text"
+                    [(ngModel)]="searchText" placeholder="Buscar usuarios" (focusin)="UsersSearch()" autofocus>
+            </div>
+            <ul class="list-group list-group-flush row  m-0">
+                <li class="list-group-item row borderdark m-0" *ngFor="let c of characters | appFilter: searchText">
+                    <form class="row col-lg-12 m-0 p-0" [formGroup]="newAmigo" (ngSubmit)="onSubminAmigo(c)">
+                        <div class="form-row row m-0 col-lg-12 col-md-12 pr-0 pl-0">
+                            <label class="pl-2 pt-2 col-lg-10 input-transparent col-10 label columTitle">{{c}}</label>
+                            <button type="submit" class="btn btn-success col-2"><i class="fa fa-user-plus"
+                                    aria-hidden="true"></i>
+                            </button>
+                        </div>
+                    </form>
+                </li>
+            </ul>
+        </div>
+        <button type="button" (click)="cancelar()" class="btn btn-danger mr-auto mt-3">
+            Cancelar<i class="fa fa-times pl-2" aria-hidden="true"></i>
+        </button>
+    </div>
+</div>

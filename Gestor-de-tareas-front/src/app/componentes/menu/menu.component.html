@@ -1,59 +1,125 @@
 <aside>
-  <nav class="d-flex" ng-click="$event.preventDefault()"> 
-    <button id="home" name="home" routerLink="/home" routerLinkActive="btn"
-      class="btn btn-aside text-dark">
-      <i class="fas fa-home " name="Home"></i>
-    </button>
-    <button id="calendario" name="calendario" routerLink="/calendario" routerLinkActive="bg-primary text-activo"
-      class="btn btn-aside text-dark">
-      <i class=" fas fa-calendar-times "></i><span class="ml-3 ">Calendario</span>
-    </button>
-    <button id="tableros" name="tableros" routerLink="/tableros" routerLinkActive="bg-primary text-activo"
-      class="btn btn-aside text-dark">
-      <i class=" fas fa-table "></i><span class="ml-3 ">Tableros</span>
-    </button> 
-
-    <img class="d-block ml-auto mr-auto" src="../../../assets/img/icons/title_icon_png.png" alt="logo" width="100px">
-    <button id="ring" name="ring" routerLinkActive="btn"
-      class="btn btn-aside text-dark">
-      <i class="fas fa-bell "></i> 1
-    </button>
-    <button id="help" name="help" routerLink="/help" routerLinkActive="btn"
-      class="btn btn-aside text-dark">
-      <i class="fas fa-question mr-1"></i>
-    </button>
-    <div class="dropdown user text-dark m-0">
-      <button class="btn col-lg-12 col-12 img-menu" style="height: 100%;" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-        <img class="rounded-circle" alt="foto_perfil" src="{{user.foto}}" />
+  <nav class="navbar navbar-expand-lg navbar-light bg-light row" ng-click="$event.preventDefault()"
+    style="height: auto;">
+    <div class="row col-4">
+      <button class="navbar-toggler col-12" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03"
+        aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
       </button>
-      <div id="menu-de" name="menu-de" class="dropdown-menu dropdown-menu-right menu" aria-labelledby="dropdownMenuButton">
-        
-        <div class="d-flex">
-          <div class="col-lg-12 col-12 p-2" style="text-align: center;">
-            <h6>{{user.email}}</h6>
-            <h6>{{user.nombre}} {{user.apellidos}}</h6>
+      <div class="collapse navbar-collapse row col-lg-12 col-12" id="navbarTogglerDemo03">
+        <ul class="navbar-nav mt-2 mt-lg-0 row">
+          <li class="btn btn-aside text-dark" id="home" name="home" routerLink="/home"
+            routerLinkActive="bg-primary text-activo">
+            <i class="fas fa-home " name="Home"></i>
+          </li>
+          <li id="calendario" name="calendario" routerLink="/calendario" routerLinkActive="bg-primary text-activo"
+            class="btn btn-aside text-dark">
+            <i class=" fas fa-calendar-times "></i><span class="ml-3 ">Calendario</span>
+          </li>
+          <li id="tableros" name="tableros" routerLink="/tableros" routerLinkActive="bg-primary text-activo"
+            class="btn btn-aside text-dark">
+            <i class=" fas fa-table "></i><span class="ml-3 ">Tableros</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="dropdown user text-dark m-0 col-9 col-lg-10 row">
+      <a class="navbar-brand btn col-lg-6 col-5 p-0"><img class="d-block background_transparent"
+          src="../../../assets/img/icons/title_icon_png.png" alt="logo" width="100px">
+      </a>
+      <a id="ring" name="ring" routerLinkActive="btn" class="btn btn-aside text-dark col-1 col-lg-1  p-0">
+        <i class="fas fa-bell btn"> 1</i>
+      </a>
+      <a id="help" name="help" routerLink="/help" routerLinkActive="btn"
+        class="p-0 btn btn-aside text-dark col-1 col-lg-1">
+        <i class="fas fa-question-circle mr-1 btn"></i>
+      </a>
+      <div class="btn-group col-lg-1 col-1">
+        <button class="btn img-menu p-0" type="button" id="dropdownMenuUser" data-toggle="dropdown" aria-haspopup="true"
+          aria-expanded="false">
+          <i class="fas fa-users mr-1"></i>
+        </button>
+        <div id="menu-us" name="menu-us" class="dropdown-menu menu dropdown-menu-right overflow"
+          aria-labelledby="dropdownMenuUser">
+          <a class="dropdown-item" (click)="modalAmigo()"><i class="mt-2 fas fa-user-plus ml-auto pl-2 pr-2"></i>Añadir
+            usuario</a>
+          <div *ngIf="this.friends==null;else other_content">
+            <h6 class="p-4"><i class="fas fa-users-slash ml-auto pl-2 pr-2"></i>No tienes usuarios agregados</h6>
+          </div>
+          <div class="dropdown-divider"></div>
+          <ng-template #other_content>
+            <div class="modal-body">
+              <div class="card" style="border: none;word-wrap: normal;">
+                <div class="list-group list-group-flush row  m-0">
+                  <div class="dropdown-divider"></div>
+                  <div class="list-group-item row m-0" *ngFor="let A of this.friends" style="border: none;">
+                    <div class="form-row row mt-3 mb-3 col-lg-12 col-md-12 pr-0 pl-0">
+                      <label class="pl-2 pt-2 col-lg-10 input-transparent col-10 label columTitle">{{A}}</label>
+                      <button type="submit" class="btn btn-danger redbackgroundsemitransparent col-2"><i
+                          class="fa fa-user-minus" aria-hidden="true"></i>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </ng-template>
+          <div class="modal-body">
+            <div class="card" style="border: none;word-wrap: normal;">
+              <h6 class="p-4"><i class="fas fa-users-slash ml-auto pl-2 pr-2"></i>Pendientes de confirmación</h6>
+              <div class="list-group list-group-flush row  m-0">
+                <div class="dropdown-divider"></div>
+                <div class="list-group-item row m-0" *ngFor="let c of this.almostfriends">
+                  <div class="form-row row mt-3 mb-3 col-lg-12 col-md-12 pr-0 pl-0">
+                    <label class="pl-2 pt-2 col-lg-10 input-transparent col-10 label columTitle">{{c}}</label>
+                    <button type="submit" class="btn btn-danger redbackgroundsemitransparent col-2"><i
+                        class="fa fa-user-clock" aria-hidden="true"></i>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer p-2">
+            <button type="button" class="btn btn-danger redbackgroundsemitransparent ml-auto" data-dismiss="modal">Close</button>
           </div>
         </div>
-        <div class="dropdown-divider"></div>
-        <a class="dropdown-item" routerLink="/perfil"><i class=" fas fa-user-cog ml-auto pl-2 pr-2"></i> Editar perfil</a>
-        <a class="dropdown-item" routerLink="/info"><i class=" fas fa-mug-hot ml-auto pl-2 pr-2"></i>Sobre nosotros</a>
-        <div class="dropdown-divider"></div>
-        <div class="col-lg-12 col-12">
-          <button id="log_out" name="log_out " routerLinkActive="bg-primary text-activo" routerLink="/login"
-            class="col-lg-12 col-12 mx-auto btn btn-aside text-dark" (click)="logOut()">
-            <i class="fas fa-sign-out-alt"></i>
-            <span class="ml-3 ">Cerrar sesión</span>
-          </button>
-        </div>
-      
       </div>
-    </div>  
+      <div class="btn-group col-lg-1 col-1">
+        <button class="btn img-menu p-0" type="button" id="dropdownMenuButton" data-toggle="dropdown"
+          aria-haspopup="true" aria-expanded="false">
+          <img class="rounded-circle ml-2 m-0" alt="foto_perfil" src="{{user.foto}}"
+            style="height: 40px; width: 40px;" />
+        </button>
+        <div id="menu-de" name="menu-de" class="dropdown-menu dropdown-menu-right menu"
+          aria-labelledby="dropdownMenuButton">
+          <div class="d-flex">
+            <div class="col-lg-12 col-12 p-2" style="text-align: center;">
+              <h6>{{user.email}}</h6>
+              <h6>{{user.nombre}} {{user.apellidos}}</h6>
+            </div>
+          </div>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" routerLink="/perfil"><i class=" fas fa-user-cog ml-auto pl-2 pr-2"></i> Editar
+            perfil</a>
+          <a class="dropdown-item" routerLink="/info"><i class=" fas fa-mug-hot ml-auto pl-2 pr-2"></i>Sobre
+            nosotros</a>
+          <div class="dropdown-divider"></div>
+          <div class="col-lg-12 col-12">
+            <button id="log_out" name="log_out " routerLinkActive="bg-primary text-activo" routerLink="/login"
+              class="col-lg-12 col-12 mx-auto btn btn-aside text-dark" (click)="logOut()">
+              <i class="fas fa-sign-out-alt"></i>
+              <span class="ml-3 ">Cerrar sesión</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
   </nav>
 </aside>
 <!--
   
--->
-<!-- 
 <aside>
     <div class="row enlaces">
       <div class="col">
@@ -68,4 +134,5 @@
         </button>
       </div>
     </div>
-  </aside>-->
+  </aside>
+-->

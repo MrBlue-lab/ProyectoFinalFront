@@ -52,4 +52,9 @@ export class GestionTablerosService {
     let headers = new HttpHeaders({Authorization: `Bearer ${this.loginService.getUser().access_token}` });
     return this.http.post(url,{'id_Creador' : this.loginService.getUser().id,'id' : id},{ headers: headers });
   };
+  public getUsersTablero = (id:any) => {
+    const url = environment.dirBack + "getUsersTablero";
+    let headers = new HttpHeaders({Authorization: `Bearer ${this.loginService.getUser().access_token}` });
+    return this.http.post(url,{'id_Tablero':id,  'id_Creador' : this.loginService.getUser().id},{ headers: headers });
+  };
 }

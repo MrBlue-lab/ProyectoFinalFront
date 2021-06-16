@@ -56,9 +56,6 @@ export class TableroComponent implements OnInit {
       'id_Creador': "",
     }
     this.id = this.CompartirDatosService.getId();
-    console.log('aquiiiiiiiiiiiiiiiiiiiiiiiiiii');
-    console.log(this.id);
-    console.log('aquiiiiiiiiiiiiiiiiiiiiiiiiiii');
     console.log(this.tablero);
   }
   
@@ -124,11 +121,11 @@ export class TableroComponent implements OnInit {
   ngTablero() {
     this.GestionTablerosService.getTablero(this.id).subscribe(
       (response: any) => {
-        this.tablero = response.message.tablero[0];
-        this.tablero.id = response.message.tablero[0].id;
-        this.tablero.nombre = response.message.tablero[0].nombre;
-        this.tablero.descripcion = response.message.tablero[0].descripcion;
-        this.tablero.id_Creador = response.message.tablero[0].id_Creador;
+        this.tablero = response.message.tablero;
+        this.tablero.id = response.message.tablero.id;
+        this.tablero.nombre = response.message.tablero.nombre;
+        this.tablero.descripcion = response.message.tablero.descripcion;
+        this.tablero.id_Creador = response.message.tablero.id_Creador;
         console.log('aqui');
         console.log(this.tablero);
         this.getColumnas();

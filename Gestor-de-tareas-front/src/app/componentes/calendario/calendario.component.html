@@ -5,8 +5,7 @@
             <app-menu></app-menu>
         </div>
         <div id="contenido" class="col-12 col-lg-12 row pt-5 m-0 p-0 overflow-hidden">
-
-            <div class="col-9 col-lg-9 mt-2 ml-1 row">
+            <div class="col-12 col-lg-9 mt-2 ml-1 mr-1 row">
                 <div class="card w-100 whitebackgroundTrans">
                     <div class="row no-gutters">
                         <div class="col-sm-12">
@@ -17,12 +16,12 @@
                                 <div class="wrapper-calendar m-0">
                                     <div class="header-calendar">
                                         <div>
-                                            <button (click)="changeMonth(-1)" class="btn-prev redbackground"><i
+                                            <button (click)="changeMonth(-1)" class="btn-prev reddarkbackground"><i
                                                     class="fas fa-chevron-left"></i></button>
                                         </div>
                                         <h1 class="text-20">{{dateSelect | date:'MMMM, yyyy'}}</h1>
                                         <div>
-                                            <button (click)="changeMonth(1)" class="btn-next redbackground"><i
+                                            <button (click)="changeMonth(1)" class="btn-next reddarkbackground"><i
                                                     class="fas fa-chevron-right"></i></button>
                                         </div>
                                     </div>
@@ -32,9 +31,11 @@
                                             [style.gridColumnStart]="first ? day?.indexWeek : 'auto'"
                                             *ngFor="let day of monthSelect;let first = first"
                                             class="pt-3 pb-3 day tarjetica whitebackground">
-                                            <span *ngIf="day.value==dateToday"
-                                                class="redbackground rounded-circle p-2 "><a>{{day?.value}}</a></span>
-                                            <span *ngIf="day.value!=dateToday" class=""><a>{{day?.value}}</a></span>
+                                            <span *ngIf="day.value==dateToday && selectedMonth==actualMonth; else elseBlock"
+                                                class="reddarkbackground rounded-circle p-2 "><a>{{day?.value}}</a></span>
+                                            <ng-template #elseBlock>
+                                                <a>{{day?.value}}</a>
+                                            </ng-template>
                                         </div>
                                     </ol>
                                 </div>
@@ -43,15 +44,15 @@
                     </div>
                 </div>
             </div>
-            <div class="col-3 col-lg-3 row mt-2 ml-0">
+            <div class="col-12 col-lg-3 row mt-2 ml-0" style="min-height: 130px;">
                 <div class="col-12 card whitebackgroundTrans">
                     <div *ngIf="dateValue!=null" class="background_transparent">
                         <div class="card-title p-3">
                             <label> Tareas de {{dateValue | date}}</label>
                         </div>
-                        <ul class="list-group list-group-flush card-body whitebackground mt-5 p-0 overflow" *ngIf="hayVecDate()">
-                            <li class="row example-box mt-1 ml-0 mr-0 pl-0 pr-0" (dblclick)="modalTarjeta(tar.id)"
-                                *ngFor="let tar of tarjetas">
+                        <ul class="list-group list-group-flush card-body mt-5 p-0 overflow" *ngIf="hayVecDate()">
+                            <li class="row example-box mt-1 ml-0 mr-0 pl-0 pr-0 whitebackground" (dblclick)="modalTarjeta(tar.id)"
+                                *ngFor="let tar of tarjetasDay">
                                 <label class="col-12 tarjeta tarjetaTitle">{{tar.nombre}}</label>
                                 <label class="col-lg-12 col-md-12 label" *ngIf="tar.check_fin!=null">
                                     <input type="checkbox" id="check_fin" class="mr-2" value=""
@@ -59,7 +60,8 @@
                                     <a
                                         *ngIf="tar.Fecha_fin!=null && tar.Fecha_fin!='' && tar.Fecha_inicio!=null && tar.Fecha_inicio!=''; else elseBlock">
                                         {{tar.Fecha_inicio}}
-                                        {{tar.Time_inicio}} -
+                                        {{tar.Time_inicio}} 
+                                        <br>
                                         {{tar.Fecha_fin}}
                                         {{tar.Time_fin}}
                                     </a>
@@ -80,17 +82,17 @@
                         <div class="card-title p-3">
                              Tareas pendientes
                         </div>
-                        <ul class="list-group list-group-flush card-body p-0 mt-5 overflow whitebackground" *ngIf="hayVec()">
-                            <li class="row example-box mt-1 ml-0 mr-0 pl-0 pr-0" (dblclick)="modalTarjeta(tar.id)"
+                        <ul class="list-group list-group-flush card-body p-0 mt-5 overflow" *ngIf="hayVec()">
+                            <li class="row example-box mt-1 ml-0 mr-0 pl-0 pr-0 whitebackground" (dblclick)="modalTarjeta(tar.id)"
                                 *ngFor="let tar of tarjetas">
                                 <label class="col-12 tarjeta tarjetaTitle">{{tar.nombre}}</label>
                                 <label class="col-lg-12 col-md-12 label" *ngIf="tar.check_fin!=null">
                                     <input type="checkbox" id="check_fin" class="mr-2" value=""
                                         [(ngModel)]="tar.check_fin" readonly (click)="false" />
-                                    <a
-                                        *ngIf="tar.Fecha_fin!=null && tar.Fecha_fin!='' && tar.Fecha_inicio!=null && tar.Fecha_inicio!=''; else elseBlock">
+                                    <a *ngIf="tar.Fecha_fin!=null && tar.Fecha_fin!='' && tar.Fecha_inicio!=null && tar.Fecha_inicio!=''; else elseBlock">
                                         {{tar.Fecha_inicio}}
-                                        {{tar.Time_inicio}} -
+                                        {{tar.Time_inicio}} 
+                                        <br>
                                         {{tar.Fecha_fin}}
                                         {{tar.Time_fin}}
                                     </a>

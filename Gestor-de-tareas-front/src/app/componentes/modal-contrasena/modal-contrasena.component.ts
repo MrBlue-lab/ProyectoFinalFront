@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { environment } from 'src/environments/environment';
+import { LoginService } from '../../servicios/login.service';
 import { ModUsService } from 'src/app/servicios/mod-us.service';
 import { ModalAlertaComponent } from '../modal-alerta/modal-alerta.component';
 import { GestionTarjetasService } from '../../servicios/gestion-tarjetas.service';
@@ -16,50 +17,25 @@ import { CompartirDatosService } from '../../servicios/compartir-datos.service';
 export class ModalContrasenaComponent implements OnInit {
   @Output() storeOk: EventEmitter<any> = new EventEmitter();
   registroPass: FormGroup;
-  newTarjeta: FormGroup;
   submitted = false;
   submittedFoto = false;
+  @Input() user: any;
 
-  constructor(public activeModal: NgbActiveModal, private formBuilder: FormBuilder,
+  constructor(private loginService: LoginService,public activeModal: NgbActiveModal, private formBuilder: FormBuilder,
     private router: Router,private mod_user: ModUsService, private modal: NgbModal, private GestionTableros: GestionTarjetasService,private CompartirDatosService:CompartirDatosService) {
-    this.newTarjeta = this.formBuilder.group({
-      nombre: ['', [Validators.required]],
-      descripcion: ['', [Validators.required]],
-      dateinit: ['', [Validators.required]],
-      datefin: ['', [Validators.required]],
-      timeinit: ['', [Validators.required]],
-      timefin: ['', [Validators.required]]
-    });
     this.registroPass = this.formBuilder.group({
       password: ['', [Validators.required, Validators.minLength]],
       newpassword: ['', [Validators.required, Validators.minLength]],
       renewpassword: ['', [Validators.required, Validators.minLength]]
     });
+    this.user = this.loginService.getUser();
   }
 
   ngOnInit(): void {
   }
 
   get formulario2() { return this.registroPass.controls; }
-  get formulario() { return this.newTarjeta.controls; }
 
-  onSubminTablero(){
-    let tablero=this.newTarjeta.value;
-    console.log(tablero);
-    this.GestionTableros.setTarjeta(tablero.nombre,tablero.descripcion,this.CompartirDatosService.getidColumna()).subscribe(
-      (response: any) => {
-        this.activeModal.close();
-        this.storeOk.emit(true);
-        console.log(response.message);
-      },
-      (error) => {
-        console.log(error);
-        const modalRef = this.modal.open(ModalAlertaComponent, { size: 'xs', backdrop: 'static' });
-        modalRef.componentInstance.mensaje = 'Ha ocurrido un error al registrar la tarjeta';
-        modalRef.componentInstance.exito = false;
-      }
-    );
-  }
   onSubmitPass() {
     this.submitted = true;
     if (this.registroPass.touched) {
@@ -75,7 +51,6 @@ export class ModalContrasenaComponent implements OnInit {
       const oldpassword = datosPass.password;
       const newpassword = datosPass.newpassword;
       this.updatePass(oldpassword,newpassword);
-     // const nombre=this.user.nombre + ' ' + this.user.apellidos;
       //this.envEmail(nombre,'tu contraseña ha sido modificada',this.user.email);
     }
     this.onReset();
@@ -83,7 +58,9 @@ export class ModalContrasenaComponent implements OnInit {
   updatePass( oldpassword: any, newpassword: any) {
     this.mod_user.Mod_user_pass( oldpassword, newpassword).subscribe(
       (response: any) => {
-        //console.log(response);
+        console.log(response);
+        this.user=response.message.user;
+        this.user.access_token = response['message']['access_token'];
         const modalRef = this.modal.open(ModalAlertaComponent, { size: 'xs', backdrop: 'static' });
         modalRef.componentInstance.mensaje = 'Contraseña actualizada correctamente';
         modalRef.componentInstance.exito = true;

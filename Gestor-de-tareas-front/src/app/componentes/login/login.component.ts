@@ -73,14 +73,14 @@ export class LoginComponent implements OnInit {
         this.user.apellidos = response.message.user.apellidos;
         this.user.nombre = response.message.user.nombre;
         this.user.password = response.message.user.password;
-        this.user.foto = environment.dirBack2 + "img/generico.jpg" ;
         //Comprobamos si tiene foto o no
-        /* 
-        if(response.message.datos_user.foto == 0){
+        
+        if(response.message.user.foto == 0){
+          this.user.foto = environment.dirBack2 + "IMG/generico.jpg" ;
         }else{
-          this.user.foto = environment.dirBack2 + "IMG/" + this.user.dni + ".png";
+          this.user.foto = environment.dirBack2 + "IMG/" + this.user.id + ".png";
         }
-        */
+        
         //Guardamos el usuario en session storage
         this.loginService.saveUser(this.user);
         this.router.navigate(['/home']);

@@ -1,4 +1,4 @@
-$primary: #CED3DC;
+$primary: rgb(203,19,26);
 $secondary: rgb(252, 247, 248);
 //$dark: #464646;
 $dark: rgb(107, 5, 4);
@@ -68,6 +68,12 @@ $h1-font-size: 2rem;
 }
 .redbackgroundsemitransparent{
     background-color:  rgba(203,19,26,0.7) !important;
+}
+.redbackgroundsemitransparent{
+    background-color:  rgba(203,19,26,0.7) !important;
+}
+.greenbackgroundsemitransparent{
+    background-color: rgba(40, 190, 60, 0.7) !important;
 }
 .border{
     border: 1px solid rgba(0, 0, 0, 0.125);

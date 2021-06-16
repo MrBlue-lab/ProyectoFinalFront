@@ -4,13 +4,33 @@
         <div id="menu" class="col-12 col-lg-12 pr-0 pl-0 bg-light" style="background-color: transparent !important;">
             <app-menu></app-menu>
         </div>
-        <div class="col-12 col-lg-12 row h-5 ml-0 mr-0 menuflotante whitebackgroundTrans pt-2 pb-2 d-flex">
-            <form [formGroup]="formTablero" (ngSubmit)="onSubmit()" class=" ml-auto mr-auto ">
+        <div class="col-12 col-lg-12 row h-5 ml-0 mr-0 menuflotante whitebackgroundTrans pt-3 pb-2 d-flex">
+            <form [formGroup]="formTablero" (ngSubmit)="onSubmit()" class="mr-3">
                 <input type="text" (focusout)="onSubmit()" [(ngModel)]="tablero.nombre" value=""
                     formControlName="nombre" id="nombre" class="pl-2 input-transparent Title"
                     style="text-align: center !important;" required />
                 <input type="number" id="tablero.id" formControlName="id" required [(ngModel)]="tablero.id" hidden />
             </form>
+            <div *ngFor="let user of users" class="mt-1 mr-2">
+                <div>
+                    <ng-template #popContent>
+                        <button class="btn" *ngIf="user.id!=userid">Expulsar del tablero</button>
+                    </ng-template>
+                    <ng-template #popTitle>
+                        <img class="rounded-circle m-2" alt="foto_perfil" src="{{user.foto}}"
+                            style="height: 60px; width: 60px;" />
+                        <b>{{user.email}} </b>{{user.nombre}} {{user.apellidos}}
+                    </ng-template>
+
+                    <button type="button" class="btn btn-outline-secondary p-0" [ngbPopover]="popContent"
+                        [popoverTitle]="popTitle" container="body" placement="bottom">
+                        <img class="rounded-circle m-0" alt="foto_perfil" src="{{user.foto}}"
+                            style="height: 30px; width: 30px;" />
+                    </button>
+                </div>
+            </div>
+            <button (click)="modalInvitarTablero()"
+                class="btn btn-submit greenbackgroundsemitransparent borderdark mr-auto">Invitar</button>
             <button (click)="eliminar(tablero.id)"
                 class="btn btn-submit redbackgroundsemitransparent borderdark ">Borrar tablero<i
                     class="fas fa-minus-square pl-2"></i></button>
@@ -28,10 +48,10 @@
                             </button>
                         </div>
                         <div class="card-body p-1 card-body-target overflow-auto">
-                            <div class="example-container  overflow-scroll">
+                            <div class="example-container  overflow-scroll" style="height: 100%;">
                                 <div cdkDropList [cdkDropListData]="col.tarjetas" class="example-list"
                                     (cdkDropListDropped)="drop2($event,col.id)"
-                                    style="overflow: scroll; width: 350px; overflow-y: auto; overflow-x: hidden;">
+                                    style="overflow: scroll; width: 350px; overflow-y: auto; overflow-x: hidden;height: 100%;">
                                     <li class="row example-box mt-1 ml-0 mr-0 pl-0 pr-0"
                                         (dblclick)="modalTarjeta(tar.id,col.id)" *ngFor="let tar of col.tarjetas"
                                         cdkDrag>

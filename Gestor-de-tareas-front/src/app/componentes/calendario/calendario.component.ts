@@ -29,6 +29,8 @@ export class CalendarioComponent implements OnInit {
   dateToday:any='';
   tarjetas:any[]=[];
   tarjetasDay:any=[];
+  actualMonth:any=0;
+  selectedMonth:any=0;
 
 
   constructor(private modal: NgbModal,private GestionTarjetasService: GestionTarjetasService,private CompartirDatosService: CompartirDatosService,) {
@@ -47,7 +49,9 @@ export class CalendarioComponent implements OnInit {
     this.getTarjeta();
     var now = new Date();
     this.dateToday=now.getDate();
-    this.getDaysFromDate(now.getMonth()+1, now.getFullYear())
+    this.getDaysFromDate(now.getMonth()+1, now.getFullYear());
+    this.actualMonth=now.getMonth()+1;
+    console.log('---------------------------',this.actualMonth);
   }
   increaseMonth(){
     var now = new Date();
@@ -89,7 +93,7 @@ export class CalendarioComponent implements OnInit {
 
 
   getDaysFromDate(month:any, year:any) {
-
+    this.selectedMonth=month;
     const startDate = moment.utc(`${year}/${month}/01`)
     const endDate = startDate.clone().endOf('month')
     this.dateSelect = startDate;

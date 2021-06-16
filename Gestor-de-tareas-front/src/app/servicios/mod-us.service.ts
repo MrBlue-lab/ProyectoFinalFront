@@ -28,13 +28,13 @@ export class ModUsService {
   /**
   * Petición de modificacion de usuario
   * */
-  public Mod_user_pass = ( password: any, newpassword: any) => {
+  public Mod_user_pass = (password: any, newpassword: any) => {
     const url = environment.dirBack + "mod_user_pass";
     let headers = new HttpHeaders({
       'Content-Type': 'application/json',
       Authorization: `Bearer ${this.loginService.getUser().access_token}`
     });
-    return this.http.put(url, {'id': this.loginService.getUser().id, 'password': password, 'newpassword': newpassword }, { headers: headers });
+    return this.http.put(url, { 'id': this.loginService.getUser().id, 'password': password, 'newpassword': newpassword }, { headers: headers });
   };
 
   public Mod_user = (email: any, nombre: any, apellidos: any) => {
@@ -43,4 +43,12 @@ export class ModUsService {
     return this.http.post(url, { 'id': this.loginService.getUser().id, 'email': email, 'nombre': nombre, 'apellidos': apellidos }, { headers: headers });
   };
 
+  //Cambiar foto perfil
+  public cambiarFoto = (img: File, id: any) => {
+    const url = environment.dirBack + "cambiarFoto/" + id;
+    const fd = new FormData;
+    fd.append('img', img, img.name);
+    let headers = new HttpHeaders({ Authorization: `Bearer ${this.loginService.getUser().access_token}` });
+    return this.http.post(url, fd, { headers: headers });
+  };
 }

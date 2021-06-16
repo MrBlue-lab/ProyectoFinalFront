@@ -85,6 +85,13 @@ div {
     text-overflow: ellipsis;
     
   }
+
+  .tarjeta{
+    white-space: break-spaces;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    color: black;
+  }
   .overflow{
     text-align: initial;
     white-space: nowrap;

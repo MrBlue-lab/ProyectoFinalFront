@@ -60,20 +60,23 @@ export class PerfilComponent implements OnInit {
   guardarFoto(event: any) {
     this.foto = <File>event.target.files[0];
   }
-/*
+
   onSubmitFoto() {
     this.submittedFoto = true;
     if (this.fotoPerfil.invalid) {
       return;
     }
-    this.AdminAlumnosService.cambiarFoto(this.foto, this.user.dni).subscribe(
+    console.log(this.foto.type);
+    this.mod_user.cambiarFoto(this.foto, this.user.id).subscribe(
       (response: any) => {
+        console.log(response.message);
         if (response.message.foto == 1) {
-          this.user.foto = environment.dirBack2 + "IMG/" + this.user.dni + ".png";
+          this.user.foto = environment.dirBack2 + "IMG/" + this.user.id + ".png";
           this.loginService.saveUser(this.user);
           const modalRef = this.modal.open(ModalAlertaComponent, { size: 'xs', backdrop: 'static' });
           modalRef.componentInstance.mensaje = 'Foto actualizada correctamente';
           modalRef.componentInstance.exito = true;
+          window.location.reload();
         }
       },
       (error) => {
@@ -84,7 +87,6 @@ export class PerfilComponent implements OnInit {
       }
     );
   }
-*/
   onSubmit() {
     this.submitted = true;
     if (this.nuevoRegistro.touched) {
@@ -182,6 +184,7 @@ export class PerfilComponent implements OnInit {
     this.mod_user.Mod_user(email, nombre, apellidos).subscribe(
       (response: any) => {
         this.user=response.message.user;
+        this.user.access_token = response['message']['access_token'];
         console.log(this.user);
         this.loginService.saveUser(this.user);
         const modalRef = this.modal.open(ModalAlertaComponent, { size: 'xs', backdrop: 'static' });

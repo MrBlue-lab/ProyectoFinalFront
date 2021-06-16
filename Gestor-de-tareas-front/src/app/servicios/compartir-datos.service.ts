@@ -7,9 +7,11 @@ export class CompartirDatosService {
   id: any;
   idTarjeta: any;
   idColumna: any;
+  idTablero: any;
   Columnas: any;
   public static readonly SESSION_STORAGE_KEY_AL: string = "idAlmacenada";
   public static readonly SESSION_STORAGE_KEY_TAR: string = "idTarjeta";
+  public static readonly SESSION_STORAGE_KEY_TAB: string = "idTablero";
   public static readonly SESSION_STORAGE_KEY_COL: string = "idColumna";
   public static readonly SESSION_STORAGE_KEY_COLUMNAS: string = "Columnas";
   
@@ -31,7 +33,18 @@ export class CompartirDatosService {
     this.idColumna = idColumna;
     sessionStorage.setItem(CompartirDatosService.SESSION_STORAGE_KEY_COL, JSON.stringify(idColumna));
   }
+  
+  getidTablero() {
+    let idTablero:any;
+    idTablero = sessionStorage.getItem(CompartirDatosService.SESSION_STORAGE_KEY_TAB);
+    var sal= JSON.parse(idTablero);
+    return sal;
+  }
 
+  setidTablero(idTablero: any) {
+    this.idTablero = idTablero;
+    sessionStorage.setItem(CompartirDatosService.SESSION_STORAGE_KEY_TAB, JSON.stringify(idTablero));
+  }
   getidColumna() {
     let idColumna:any;
     idColumna = sessionStorage.getItem(CompartirDatosService.SESSION_STORAGE_KEY_COL);

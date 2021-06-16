@@ -8,9 +8,11 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ModalColumnaComponent } from '../modal-columna/modal-columna.component';
 import { ModalAddColumnaComponent } from '../modal-add-columna/modal-add-columna.component';
 import { ModalAddTarjetaComponent } from '../modal-add-tarjeta/modal-add-tarjeta.component';
+import { ModalInvitarTableroComponent } from '../modal-invitar-tablero/modal-invitar-tablero.component';
 import { ModalTarjetaComponent } from '../modal-tarjeta/modal-tarjeta.component';
 import { GestionColumnasService } from '../../servicios/gestion-columnas.service';
 import { GestionTarjetasService } from '../../servicios/gestion-tarjetas.service';
+import { LoginService } from '../../servicios/login.service';
 import { Router } from '@angular/router';
 import { textSpanIntersectsWithPosition } from 'typescript';
 
@@ -24,22 +26,23 @@ export class Tablerov2Component implements OnInit {
   formTablero: FormGroup;
   id: any;
   submitted = false;
-  tarjetas = [{ 'valor': 'hola' }, { 'id_Columna': '0' }];
   tarjetastab: any;
-  tablero: any;
+  @Input() tablero: any = [];
   columnas: any;
   tablerov2 = [];
+  @Input() contUsers:any=0;
+  @Input() users:any=[];
+  @Input() userid:any=null;
 
-  constructor(private modal: NgbModal, private formBuilder: FormBuilder, private CompartirDatosService: CompartirDatosService, private GestionTablerosService: GestionTablerosService, private GestionColumnas: GestionColumnasService, private GestionTarjetasService: GestionTarjetasService, private router: Router) {
+
+  constructor(private loginService: LoginService,private modal: NgbModal, private formBuilder: FormBuilder, private CompartirDatosService: CompartirDatosService, private GestionTablerosService: GestionTablerosService, private GestionColumnas: GestionColumnasService, private GestionTarjetasService: GestionTarjetasService, private router: Router) {
     this.formTablero = this.formBuilder.group({
       id: '',
       nombre: '',
     });
     this.tarjetastab = [];
     this.columnas = [];
-    this.tablero = [];
     this.id = this.CompartirDatosService.getId();
-    this.ngTablero();
   }
 
   get formulario() { return this.formTablero.controls; }
@@ -121,11 +124,10 @@ export class Tablerov2Component implements OnInit {
 
   ngTablero() {
     this.GestionTablerosService.getTablero(this.id).subscribe((response: any) => {
-      this.tablero = response.message.tablero[0];
-      this.tablero.id = response.message.tablero[0].id;
-      this.tablero.nombre = response.message.tablero[0].nombre;
-      this.tablero.descripcion = response.message.tablero[0].descripcion;
-      this.tablero.id_Creador = response.message.tablero[0].id_Creador;
+      this.tablero = response.message.tablero;
+      console.log(this.tablero);
+      this.getUsersTablero(this.tablero.id);
+      this.CompartirDatosService.setidTablero(this.tablero.id);
       this.getColumnas()
     },
       (error) => {
@@ -137,6 +139,7 @@ export class Tablerov2Component implements OnInit {
   ngOnInit(): void {
     this.id = this.CompartirDatosService.getId();
     this.ngTablero();
+    this.userid=this.loginService.getUser().id;
   }
 
   ngOnChanges(): void {
@@ -205,5 +208,31 @@ export class Tablerov2Component implements OnInit {
         }
       );
     });
+  }
+
+
+  modalInvitarTablero(): void {
+    const modalRef = this.modal.open(ModalInvitarTableroComponent, { size: 'xs', backdrop: 'static' });
+    modalRef.componentInstance.mensaje = 'Ha ocurrido un error';
+    modalRef.componentInstance.exito = false;
+    modalRef.componentInstance["storeOk"].subscribe((event: any) => {
+      this.id = this.CompartirDatosService.getId();
+      this.ngTablero();
+    });
+  }
+
+  getUsersTablero(id: any) {
+    this.GestionTablerosService.getUsersTablero(id).subscribe(
+      (response: any) => {
+        this.users=response.message.users;
+        console.log(response.message);
+      },
+      (error) => {
+        console.log(error);
+        const modalRef = this.modal.open(ModalAlertaComponent, { size: 'xs', backdrop: 'static' });
+        modalRef.componentInstance.mensaje = 'Ha ocurrido un error al obtener usuarios';
+        modalRef.componentInstance.exito = false;
+      }
+    );
   }
 }

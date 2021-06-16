@@ -35,6 +35,9 @@ import { CalendarModule, DateAdapter } from 'angular-calendar';
 import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 import { PerfilComponent } from './componentes/perfil/perfil.component';
 import { ModalContrasenaComponent } from './componentes/modal-contrasena/modal-contrasena.component';
+import { FiltroPipe } from './pipes/filtro.pipe';
+import { ModalAmigosComponent } from './componentes/modal-amigos/modal-amigos.component';
+import { ModalInvitarTableroComponent } from './componentes/modal-invitar-tablero/modal-invitar-tablero.component';
 
 
 
@@ -65,6 +68,9 @@ import { ModalContrasenaComponent } from './componentes/modal-contrasena/modal-c
     BannerComponent,
     PerfilComponent,
     ModalContrasenaComponent,
+    FiltroPipe,
+    ModalAmigosComponent,
+    ModalInvitarTableroComponent,
   ],
   imports: [
     DragDropModule,
